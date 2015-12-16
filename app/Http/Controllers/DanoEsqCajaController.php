@@ -15,12 +15,12 @@ class DanoEsqCajaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function get_by_esq_caja($id)
+    public function index( )
     {
-        //Get all the tractors
-		$dano_esq_cajas = DanoEsqCaja::where( 'esq_caja_id', '==', $id );
-		// Return the tractors to the index view
-		return response()->json( $dano_esq_cajas );
+        //Get all the dano_esq_caja
+		$dano_esq_caja = DanoEsqCaja::all();
+		// Return the dano_esq_caja to the index view
+		return response()->json( $dano_esq_caja );
     }//End of index function
 
     /**
@@ -30,8 +30,11 @@ class DanoEsqCajaController extends Controller
      */
     public function create()
     {
-        //
-    }
+        //Create object
+		$dano_esq_caja = new DanoEsqCaja;
+		//Return the object serialized
+		return response()->json( $dano_esq_caja );
+    }//End of create function
 
     /**
      * Store a newly created resource in storage.
@@ -41,8 +44,13 @@ class DanoEsqCajaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+		// Init dano_esq_caja
+        $dano_esq_caja = new DanoEsqCaja( Request::all() );
+		// Save dano_esq_caja
+		$dano_esq_caja->save();
+		// Return dano_esq_caja
+		return response()->json( $dano_esq_caja );
+    }//End of store function
 
     /**
      * Display the specified resource.
@@ -52,8 +60,11 @@ class DanoEsqCajaController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        //Get by id
+		$dano_esq_caja = DanoEsqCaja::find( $id );
+		//Return serialized object
+		return response()->json( $dano_esq_caja );
+    }//End of show function
 
     /**
      * Show the form for editing the specified resource.
@@ -63,8 +74,11 @@ class DanoEsqCajaController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        //Get by id
+		$dano_esq_caja = DanoEsqCaja::find( $id );
+		//Return serialized object
+		return response()->json( $dano_esq_caja );
+    }//End of edit function
 
     /**
      * Update the specified resource in storage.
@@ -75,8 +89,15 @@ class DanoEsqCajaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        //get object by id
+		$dano_esq_caja = DanoEsqCaja::find( $id );
+		//Fill the model
+		$dano_esq_caja->fill( $request->input() );
+		//Update the model
+		$dano_esq_caja->update();
+		//Return the object
+		return response()->json( $dano_esq_caja );
+    }//End of update function
 
     /**
      * Remove the specified resource from storage.
@@ -86,6 +107,9 @@ class DanoEsqCajaController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-}
+        //Get by id
+		$dano_esq_caja = DanoEsqCaja::find( $id );
+		//delete model
+		$dano_esq_caja->forceDelete();
+    }//End of destroy function
+}//End of DanoEsqCaja Controller class

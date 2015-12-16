@@ -23,8 +23,10 @@ Route::group( array( 'prefix' => 'api' ), function(){
 	Route::resource( 'tractors', 'TractorController' );
 	Route::resource( 'cajas', 'CajaController' );
 	Route::resource( 'chofers', 'ChoferController' );
+	//Lantas
 	//Authentication
 	Route::resource( 'users', 'Auth\AuthController' );
+	Route::resource( 'roles', 'RolController' );
 	//Daños
 	Route::resource( 'dano_esq_cajas', 'DanoEsqCajaController' );
 	Route::resource( 'dano_esq_tractors', 'DanoEsqTractorController' );
@@ -34,7 +36,12 @@ Route::group( array( 'prefix' => 'api' ), function(){
 	//Especific functions
 	Route::get( 'tractors/ByUserId/{id}', 'TractorController@getByUserId' );
 	Route::get( 'cajas/ByTractorId/{id}', 'CajaController@getByTractorId' );
-	
+	//Get esquematico por tractor id
+	//Get esquematico por caja id
+	//Get daños por esquematico tactor
+	//Get daños por esquematico caja
+	//Get llantas por tractor
+	//Get llantas por caja
 });//End of api routes definition
 
 //Images route

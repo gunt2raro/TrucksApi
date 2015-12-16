@@ -8,6 +8,9 @@ use App\EsqCaja;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+/***
+* EsqCaja controller class
+***/
 class EsqCajaController extends Controller
 {
     /**
@@ -15,13 +18,13 @@ class EsqCajaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index( $id )
+    public function index( )
     {
         //Get all the tractors
-		$esq_cajas = EsqCaja::where( 'caja_id', '==', $id );
+		$esq_cajas = EsqCaja::all( );
 		// Return the tractors to the index view
 		return response()->json( $esq_cajas );
-    }
+    }//End of index function
 
     /**
      * Show the form for creating a new resource.
@@ -30,8 +33,11 @@ class EsqCajaController extends Controller
      */
     public function create()
     {
-        //
-    }
+        //init new object
+		$esq_caja = new EsqCaja;
+		//return serialized object
+		return response()->json( $esq_caja );
+    }//End of create function
 
     /**
      * Store a newly created resource in storage.
@@ -41,8 +47,13 @@ class EsqCajaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Init tractor
+        $esq_caja = new EsqCaja( Request::all() );
+		// Save tractor
+		$esq_caja->save();
+		// Return tractor
+		return response()->json( $esq_caja );
+    }//End of store function
 
     /**
      * Display the specified resource.
@@ -52,8 +63,11 @@ class EsqCajaController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        //init new object
+		$esq_caja = EsqCaja::find( $id );
+		//return serialized object
+		return response()->json( $esq_caja );
+    }//End of show function
 
     /**
      * Show the form for editing the specified resource.
@@ -63,8 +77,11 @@ class EsqCajaController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+        //init new object
+		$esq_caja = EsqCaja::find( $id );
+		//return serialized object
+		return response()->json( $esq_caja );
+    }//End of edit function
 
     /**
      * Update the specified resource in storage.
@@ -75,8 +92,15 @@ class EsqCajaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        //get object by id
+		$esq_caja = EsqCaja::find( $id );
+		//Fill the model
+		$esq_caja->fill( $request->input() );
+		//Update the model
+		$esq_caja->update();
+		//Return the object
+		return response()->json( $esq_caja );
+    }//End of udpate function
 
     /**
      * Remove the specified resource from storage.
@@ -86,6 +110,9 @@ class EsqCajaController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-}
+        // Find the tractor
+		$esq_caja = EsqCaja::find( $id );
+		// Delete the model
+		$esq_caja->forceDelete();
+    }//End of destroy function 
+}//End of esq_caja controller class

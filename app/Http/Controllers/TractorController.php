@@ -33,7 +33,10 @@ class TractorController extends Controller
      */
     public function create()
     {
-        //
+        //create the object
+		$tractor = new Tractor;
+		//Return the empty object
+		return response()->json( $tractor );
     }//End of create function
 
     /**
